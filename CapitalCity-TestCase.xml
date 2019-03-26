@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="df6bd9e0-e100-4d93-bb47-a79c08605ab0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CapitalCity TestCase" searchProperties="true" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="request" id="0f5b9eb0-6a19-4fa4-b3dc-1acb7cb7b4b5" name="CapitalCity"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CountryInfoServiceSoapBinding</con:interface><con:operation>CapitalCity</con:operation><con:request name="CapitalCity" id="52825b33-8c71-487a-aeed-e6035834611f"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.oorsprong.org/websamples.countryinfo">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <web:CapitalCity>\r
+         <web:sCountryISOCode>${Prop#VedangProp}</web:sCountryISOCode>\r
+      </web:CapitalCity>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Simple Contains" id="21a2b216-8cc3-4f2e-8974-185f6256585e" name="Contains"><con:configuration><token>New delhi</token><ignoreCase>true</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.oorsprong.org/websamples.countryinfo/CountryInfoServiceSoapType/CapitalCityRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="properties" name="Prop" id="bcd8e6a6-8550-484e-b5bd-e1cf0db90756"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>Name</con:name><con:value>Vedang TestStep Propertie</con:value></con:property><con:property><con:name>VedangProp</con:name><con:value>IN</con:value></con:property><con:property><con:name>CountryName</con:name><con:value>FR</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script" id="d591b124-4c0b-4e5c-a19b-3efb4a2140e2"><con:settings/><con:config><script>log.info "hi.."
+def name=context.expand('${Prop#VedangProp}')
+log.info name
+def nameq=context.expand('${#Env#MAVEN_HOME}')
+log.info nameq</script></con:config></con:testStep><con:testStep type="groovy" name="GetSetProp" id="27e8ce0c-0214-4b9c-945e-f0258eb6d8e5"><con:settings/><con:config><script>// Get and Set Property
+
+//Project
+def test1= testRunner.testCase.testSuite.project.getPropertyValue("Name")
+log.info (test1)
+//testRunner.testCase.testSuite.project.setPropertyValue("Name","I am in Project")
+
+//TestSuite
+def test2= testRunner.testCase.testSuite.getPropertyValue("Name")
+log.info (test2)
+//testRunner.testCase.testSuite.setPropertyValue("Name","I am in TestSuite")
+
+//TestCase
+def test3 = testRunner.testCase.getPropertyValue("Name")
+log.info (test3)
+//testRunner.testCase.setPropertyValue("Name","I am in TestCase")
+
+//TestStep
+def test4 = testRunner.testCase.getTestStepByName("Prop").getPropertyValue("Name")
+log.info (test4)
+//testRunner.testCase.getTestStepByName("CountryCodes").setPropertyValue("Name","I am in Test Step")
+
+//Global
+def test5 = com.eviware.soapui.SoapUI.globalProperties.getPropertyValue( "Name")
+log.info(test5)
+//com.eviware.soapui.SoapUI.globalProperties.setPropertyValue( "Name","I am in Global Prop" )
+
+//
+//// Add Property
+//testRunner.testCase.testSuite.project.addProperty("DOB")
+//
+//// Remove property
+////Project
+//testRunner.testCase.testSuite.project.removeProperty("Name");
+////TestSuite
+//testRunner.testCase.testSuite.removeProperty("Name")
+//
+//// Loop through properties
+//
+//testRunner.testCase.properties.each
+//{
+// key,value -
+// log.info (testRunner.testCase.getPropertyValue(key))
+// //log.info (key+" - "+value)
+//}</script></con:config></con:testStep><con:properties><con:property><con:name>Name</con:name><con:value>Vedang TastCase Propertie</con:value></con:property><con:property><con:name>CountryName</con:name><con:value>IN</con:value></con:property></con:properties><con:reportParameters/></con:testCase>
